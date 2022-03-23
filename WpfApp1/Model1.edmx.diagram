@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0bcd52dc1fb4af18e91b2b2057f6a3b" Name="Diagram1">
+        <EntityTypeShape EntityType="pizzq1Model.Client" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.Employee" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.Gender" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.main" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.MetodDost" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.MetOforml" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pizzq1Model.Post" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="pizzq1Model.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="pizzq1Model.FK_main_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="pizzq1Model.FK_Employee_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="pizzq1Model.FK_Employee_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="pizzq1Model.FK_main_MetodDost" ManuallyRouted="false" />
+        <AssociationConnector Association="pizzq1Model.FK_main_MetOforml" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

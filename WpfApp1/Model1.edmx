@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище pizzq1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="num" Type="varchar" MaxLength="11" />
+          <Property Name="age" Type="int" />
+          <Property Name="gender" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="patonymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="adres" Type="nvarchar" MaxLength="50" />
+          <Property Name="num" Type="int" />
+          <Property Name="age" Type="int" />
+          <Property Name="post" Type="int" />
+          <Property Name="gender" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="gender" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="main">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="product" Type="int" />
+          <Property Name="client" Type="int" />
+          <Property Name="metodDost" Type="int" />
+          <Property Name="adres" Type="nvarchar" MaxLength="50" />
+          <Property Name="metodOforml" Type="int" />
+        </EntityType>
+        <EntityType Name="MetodDost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="metodDost" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="MetOforml">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="metodOforml" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="post" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Client_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_MetodDost">
+          <End Role="MetodDost" Type="Self.MetodDost" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodDost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="metodDost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_MetOforml">
+          <End Role="MetOforml" Type="Self.MetOforml" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetOforml">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="metodOforml" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище pizzq1ModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="main" EntityType="Self.main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetodDost" EntityType="Self.MetodDost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetOforml" EntityType="Self.MetOforml" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Gender" Association="Self.FK_Employee_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_Client" Association="Self.FK_main_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_MetodDost" Association="Self.FK_main_MetodDost">
+            <End Role="MetodDost" EntitySet="MetodDost" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_MetOforml" Association="Self.FK_main_MetOforml">
+            <End Role="MetOforml" EntitySet="MetOforml" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pizzq1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="num" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="gender" Type="Int32" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="main" Relationship="Self.FK_main_Client" FromRole="Client" ToRole="main" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patonymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="num" Type="Int32" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="post" Type="Int32" />
+          <Property Name="gender" Type="Int32" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_Employee_Gender" FromRole="Employee" ToRole="Gender" />
+          <NavigationProperty Name="Post1" Relationship="Self.FK_Employee_Post" FromRole="Employee" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="gender1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Gender" FromRole="Gender" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="main">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="product" Type="Int32" />
+          <Property Name="client" Type="Int32" />
+          <Property Name="metodDost" Type="Int32" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="metodOforml" Type="Int32" />
+          <NavigationProperty Name="Client1" Relationship="Self.FK_main_Client" FromRole="main" ToRole="Client" />
+          <NavigationProperty Name="MetodDost1" Relationship="Self.FK_main_MetodDost" FromRole="main" ToRole="MetodDost" />
+          <NavigationProperty Name="MetOforml" Relationship="Self.FK_main_MetOforml" FromRole="main" ToRole="MetOforml" />
+        </EntityType>
+        <EntityType Name="MetodDost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="metodDost1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="main" Relationship="Self.FK_main_MetodDost" FromRole="MetodDost" ToRole="main" />
+        </EntityType>
+        <EntityType Name="MetOforml">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="metodOforml" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="main" Relationship="Self.FK_main_MetOforml" FromRole="MetOforml" ToRole="main" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="post1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Post" FromRole="Post" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Client_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_MetodDost">
+          <End Role="MetodDost" Type="Self.MetodDost" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodDost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="metodDost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_main_MetOforml">
+          <End Role="MetOforml" Type="Self.MetOforml" Multiplicity="0..1" />
+          <End Role="main" Type="Self.main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetOforml">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="main">
+              <PropertyRef Name="metodOforml" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pizzq1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="main" EntityType="Self.main" />
+          <EntitySet Name="MetodDost" EntityType="Self.MetodDost" />
+          <EntitySet Name="MetOforml" EntityType="Self.MetOforml" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_Client" Association="Self.FK_main_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Gender" Association="Self.FK_Employee_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_MetodDost" Association="Self.FK_main_MetodDost">
+            <End Role="MetodDost" EntitySet="MetodDost" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_main_MetOforml" Association="Self.FK_main_MetOforml">
+            <End Role="MetOforml" EntitySet="MetOforml" />
+            <End Role="main" EntitySet="main" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище pizzq1ModelContainer" CdmEntityContainer="pizzq1Entities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="pizzq1Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="pizzq1Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patonymic" ColumnName="patonymic" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="pizzq1Model.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="gender1" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="main">
+            <EntityTypeMapping TypeName="pizzq1Model.main">
+              <MappingFragment StoreEntitySet="main">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="metodDost" ColumnName="metodDost" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="metodOforml" ColumnName="metodOforml" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodDost">
+            <EntityTypeMapping TypeName="pizzq1Model.MetodDost">
+              <MappingFragment StoreEntitySet="MetodDost">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="metodDost1" ColumnName="metodDost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetOforml">
+            <EntityTypeMapping TypeName="pizzq1Model.MetOforml">
+              <MappingFragment StoreEntitySet="MetOforml">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="metodOforml" ColumnName="metodOforml" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="pizzq1Model.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="post1" ColumnName="post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
